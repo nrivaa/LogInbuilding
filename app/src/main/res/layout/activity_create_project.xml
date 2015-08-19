@@ -25,7 +25,7 @@
                 android:paddingBottom="5dp" >
 
                 <ImageButton
-                    android:id="@+id/submit_open_imgbtn"
+                    android:id="@+id/createProject_imgbtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -69,6 +69,7 @@
                     android:layout_height="wrap_content" />
 
                 <RadioGroup
+                    android:id="@+id/rbService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -103,6 +104,7 @@
                     android:layout_height="wrap_content" />
 
                 <RadioGroup
+                    android:id="@+id/rbAccess"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
