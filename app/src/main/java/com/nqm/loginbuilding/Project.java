@@ -2,6 +2,7 @@ package com.nqm.loginbuilding;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.method.DateTimeKeyListener;
 import android.util.Log;
@@ -25,8 +26,8 @@ public class Project {
     private String buildingID;
     private String name;
     private String service;
-    //private String photo;
-    private int accessSite;
+    private Uri photo;
+    private String accessSite;
     private String contactName;
     private String contactNumber;
     private String IMEI_AWN;
@@ -73,6 +74,14 @@ public class Project {
         }
     }
 
+    public Uri getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Uri photo) {
+        this.photo = photo;
+    }
+
     public String getName() {
         return name;
     }
@@ -97,11 +106,11 @@ public class Project {
         this.service = service;
     }
 
-    public int getAccessSite() {
+    public String getAccessSite() {
         return accessSite;
     }
 
-    public void setAccessSite(int accessSite) {
+    public void setAccessSite(String accessSite) {
         this.accessSite = accessSite;
     }
 

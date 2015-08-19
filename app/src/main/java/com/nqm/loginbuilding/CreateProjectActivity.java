@@ -42,6 +42,7 @@ public class CreateProjectActivity extends ActionBarActivity {
     private String[] arraySpinner;
     private TextView tvBuildingID,tvName,tvContact,tvNumber,tvImsiA,tvImsiD,tvImsiT,tvImsi3,tvAddress,tvTambon,tvDistrict,tvPostCode,tvDetail;
     private ImageButton btnCapture;
+    private Spinner s;
     private RadioGroup rgService, rgAccess;
 
     // Location loc ;
@@ -140,7 +141,7 @@ public class CreateProjectActivity extends ActionBarActivity {
                 "Ayutthaya",
                 "Thonburi"
         };
-        Spinner s = (Spinner) findViewById(R.id.spnProvince);
+        s = (Spinner) findViewById(R.id.spnProvince);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner);
         s.setAdapter(adapter);
 
@@ -180,7 +181,10 @@ public class CreateProjectActivity extends ActionBarActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ctx,ProjectDetailActivity.class);
+
+                SubmitProject(true);
+
+                Intent i = new Intent(ctx, ProjectDetailActivity.class);
                 startActivity(i);
             }
         });
@@ -197,10 +201,34 @@ public class CreateProjectActivity extends ActionBarActivity {
 
     // SubmitProject
     private void SubmitProject(boolean submitFlag) {
-
-
-        //Upload to Async
-
+        if (submitFlag) {
+            Project pj = new Project();
+            pj.setName(tvName.getText().toString());
+            //get text form radio button
+            int selectedId = rgService.getCheckedRadioButtonId();
+            RadioButton radioBtn = (RadioButton) findViewById(selectedId);
+            pj.setService(radioBtn.getText().toString());
+            pj.setPhoto(fileUri);
+            int selectedId1 = rgService.getCheckedRadioButtonId();
+            RadioButton radioBtn1 = (RadioButton) findViewById(selectedId1);
+            pj.setAccessSite(radioBtn.getText().toString());
+            pj.setContactName(tvContact.getText().toString());
+            pj.setContactNumber(tvNumber.getText().toString());
+            pj.setIMEI_AWN(tvImsiA.getText().toString());
+            pj.setIMEI_DTAC(tvImsiD.getText().toString());
+            pj.setIMEI_TRUEH(tvImsiT.getText().toString());
+            pj.setIMEI_3BB(tvImsi3.getText().toString());
+            pj.setAddress(tvAddress.getText().toString());
+            pj.setTambon(tvTambon.getText().toString());
+            pj.setDistrict(tvDistrict.getText().toString());
+            pj.setProvince(s.getSelectedItem().toString());
+            pj.setPostCode(tvPostCode.getText().toString());
+            pj.setBuildingDetail(tvDetail.getText().toString());
+        }else{
+            Toast.makeText(getApplicationContext(),
+                    "Sorry! submitFlag False",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     /*
