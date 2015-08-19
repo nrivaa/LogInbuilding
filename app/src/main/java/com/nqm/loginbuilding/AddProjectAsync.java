@@ -10,11 +10,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 /**
  * Created by sirawang on 02/07/2015.
@@ -24,20 +27,21 @@ public class AddProjectAsync extends AsyncTask<String, Integer, String> {
 
 private Context context;
 private ProgressDialog ringProgressDialog;
-private int curPage;
+private Project pj;
+long totalSize = 0;
 
-    AddProjectAsync(Context context, int page) {
+    AddProjectAsync(Context context, Project pj) {
         this.context = context;
-        this.curPage = page;
+        this.pj = pj;
         //ringProgressDialog = new ProgressDialog(context);
         }
 
 protected void onPreExecute() {
 
-        String loadtext = "Get information...";
-        ringProgressDialog = ProgressDialog.show(context, "Please wait ...",
-        loadtext, false);
-        ringProgressDialog.setCancelable(false);
+    String loadtext = "Get information...";
+    ringProgressDialog = ProgressDialog.show(context, "Please wait ...",
+            loadtext, false);
+    ringProgressDialog.setCancelable(false);
 
         }
 
@@ -50,24 +54,46 @@ protected String doInBackground(String... arg0) {
 public String InvokeGetFeed() {
         String responseString = null;
 
-        HttpPost httppost = new HttpPost("http://www.youtube.com");
+        HttpPost httppost = new HttpPost(Config.url_addProject);
 
         HttpClient httpclient = new DefaultHttpClient();
 
         try {
         AndroidMultiPartEntity entity = new AndroidMultiPartEntity(
         new AndroidMultiPartEntity.ProgressListener() {
-
-@Override
-public void transferred(long num) {
-        }
+                @Override
+                public void transferred(long num) {
+                }
         });
 
-
+            Log.e("Test Data Project:","Building = "+pj.getBuildingID().toString());
         // Adding file data to http body
+        Charset chars = Charset.forName("UTF-8");
+        File sourceFile = new File(pj.getPhoto().getPath());
+        Config.resizeImageFile(sourceFile);
+        entity.addPart("image", new FileBody(sourceFile));
+            entity.addPart("Building_ID", new StringBody(pj.getBuildingID().toString()));
+            entity.addPart("Name", new StringBody(pj.getName().toString()));
+            entity.addPart("Service", new StringBody(pj.getService().toString()));
+            entity.addPart("Access_Site", new StringBody(pj.getAccessSite().toString()));
+            entity.addPart("Contact_Name", new StringBody(pj.getContactName().toString()));
+            entity.addPart("Contact_Number", new StringBody(pj.getContactNumber().toString()));
+            entity.addPart("IMEI_AWN", new StringBody(pj.getIMEI_AWN().toString()));
+            entity.addPart("IMEI_DTAC", new StringBody(pj.getIMEI_DTAC().toString()));
+            entity.addPart("IMEI_TRUEH", new StringBody(pj.getIMEI_TRUEH().toString()));
+            entity.addPart("IMEI_3BB", new StringBody(pj.getIMEI_3BB().toString()));
+            entity.addPart("Address", new StringBody(pj.getAddress().toString()));
+            entity.addPart("Tambon", new StringBody(pj.getTambon().toString()));
+            entity.addPart("Province", new StringBody(pj.getProvince().toString()));
+            entity.addPart("Postcode", new StringBody(pj.getPostCode().toString()));
+            entity.addPart("Building_Detail", new StringBody(pj.getBuildingDetail().toString()));
+            entity.addPart("Latitude", new StringBody(pj.getLattitude().toString()));
+            entity.addPart("Longitude", new StringBody(pj.getLongitude().toString()));
+            entity.addPart("User", new StringBody(pj.getUser().toString()));
+            entity.addPart("LAC", new StringBody(pj.getLAC().toString()));
+            entity.addPart("CID", new StringBody(pj.getCID().toString()));
 
-        entity.addPart("page", new StringBody(Integer.toString(curPage)));
-
+        totalSize = entity.getContentLength();
         httppost.setEntity(entity);
 
         // Making server call
@@ -146,6 +172,6 @@ protected void onPostExecute(String result) {
 //            ((FeedActivity) context).dismissLoadingTopBottom();
 //        }
 
-        ringProgressDialog.dismiss();
+    //ringProgressDialog.dismiss();
         }
         }

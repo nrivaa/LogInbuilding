@@ -41,8 +41,8 @@ public class Project {
     private String postCode;
     private String buildingDetail;
     private Date createDate;
-    private double Lattitude;
-    private double Longitude;
+    private String Lattitude;
+    private String Longitude;
     private String user;
     private String LAC;
     private String CID;
@@ -210,19 +210,19 @@ public class Project {
         this.createDate = createDate;
     }
 
-    public double getLattitude() {
+    public String getLattitude() {
         return Lattitude;
     }
 
-    public void setLattitude(double lattitude) {
+    public void setLattitude(String lattitude) {
         Lattitude = lattitude;
     }
 
-    public double getLongitude() {
+    public String getLongitude() {
         return Longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         Longitude = longitude;
     }
 
@@ -322,8 +322,8 @@ public class Project {
     }
 
     public void AddProject(){
-        //TODO: Implement code
-
+        AddProjectAsync AddProject = new AddProjectAsync(ctx,this);
+        AddProject.execute();
     }
 
     public void EditProject(){

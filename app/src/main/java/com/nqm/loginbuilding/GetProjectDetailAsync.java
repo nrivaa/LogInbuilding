@@ -119,7 +119,7 @@ public class GetProjectDetailAsync extends AsyncTask<String, Integer, String> {
                     Project.getInstance().setBuildingID(obj.getString("Building_ID"));
                     Project.getInstance().setName(obj.getString("Name"));
                     Project.getInstance().setService(obj.getString("Service"));
-                    Project.getInstance().setAccessSite(obj.getInt("Access_Site"));
+                    Project.getInstance().setAccessSite(obj.getString("Access_Site"));
                     Project.getInstance().setContactName(obj.getString("Contact_Name"));
                     Project.getInstance().setContactNumber(obj.getString("Contact_Number"));
                     Project.getInstance().setIMEI_AWN(obj.getString("IMEI_AWN"));
@@ -133,8 +133,8 @@ public class GetProjectDetailAsync extends AsyncTask<String, Integer, String> {
                     Project.getInstance().setPostCode(obj.getString("Postcode"));
                     Project.getInstance().setBuildingDetail(obj.getString("Building_Detail"));
                     Project.getInstance().setCreateDate(new Date());
-                    Project.getInstance().setLattitude(obj.getDouble("Latitude"));
-                    Project.getInstance().setLongitude(obj.getDouble("Longitude"));
+                    Project.getInstance().setLattitude(obj.getString("Latitude"));
+                    Project.getInstance().setLongitude(obj.getString("Longitude"));
                     Project.getInstance().setUser(obj.getString("User"));
                     Project.getInstance().setLAC(obj.getString("LAC"));
                     Project.getInstance().setCID(obj.getString("CID"));

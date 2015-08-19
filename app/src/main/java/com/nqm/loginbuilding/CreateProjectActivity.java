@@ -11,6 +11,8 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
+import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,7 +42,7 @@ import android.widget.Toast;
 public class CreateProjectActivity extends ActionBarActivity {
 
     private String[] arraySpinner;
-    private TextView tvBuildingID,tvName,tvContact,tvNumber,tvImsiA,tvImsiD,tvImsiT,tvImsi3,tvAddress,tvTambon,tvDistrict,tvPostCode,tvDetail;
+    private TextView tvBuildingID,tvName,tvContact,tvNumber,tvImsiA,tvImsiD,tvImsiT,tvImsi3,tvAddress,tvTambon,tvDistrict,tvPostCode,tvDetail,tvLac,tvCid,tvLat,tvLng;
     private ImageButton btnCapture;
     private Spinner s;
     private RadioGroup rgService, rgAccess;
@@ -145,6 +147,12 @@ public class CreateProjectActivity extends ActionBarActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner);
         s.setAdapter(adapter);
 
+        // Test Get CID/LAC
+        TelephonyManager tm =(TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        GsmCellLocation cellLocation = (GsmCellLocation)tm.getCellLocation();
+        int new_cid = cellLocation.getCid() & 0xffff;
+        int new_lac = cellLocation.getLac() & 0xffff;
+
         final Context ctx = getApplicationContext();
 
         tvBuildingID = (TextView)findViewById(R.id.createProject_BuildingID);
@@ -163,6 +171,13 @@ public class CreateProjectActivity extends ActionBarActivity {
         btnCapture = (ImageButton)findViewById(R.id.createProject_imgbtn);
         rgService = (RadioGroup)findViewById(R.id.rbService);
         rgAccess = (RadioGroup)findViewById(R.id.rbAccess);
+        tvLat = (TextView)findViewById(R.id.createProject_latitude);
+        tvLng = (TextView)findViewById(R.id.createProject_longitude);
+        tvLac = (TextView)findViewById(R.id.createProject_lac);
+        tvCid = (TextView)findViewById(R.id.createProject_cid);
+
+        tvLac.setText(String.valueOf(new_lac));
+        tvCid.setText(String.valueOf(new_cid));
 
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
@@ -184,8 +199,8 @@ public class CreateProjectActivity extends ActionBarActivity {
 
                 SubmitProject(true);
 
-                Intent i = new Intent(ctx, ProjectDetailActivity.class);
-                startActivity(i);
+                //Intent i = new Intent(ctx, ProjectDetailActivity.class);
+                //startActivity(i);
             }
         });
 
@@ -203,6 +218,7 @@ public class CreateProjectActivity extends ActionBarActivity {
     private void SubmitProject(boolean submitFlag) {
         if (submitFlag) {
             Project pj = new Project();
+            pj.setBuildingID(tvBuildingID.getText().toString());
             pj.setName(tvName.getText().toString());
             //get text form radio button
             int selectedId = rgService.getCheckedRadioButtonId();
@@ -224,6 +240,14 @@ public class CreateProjectActivity extends ActionBarActivity {
             pj.setProvince(s.getSelectedItem().toString());
             pj.setPostCode(tvPostCode.getText().toString());
             pj.setBuildingDetail(tvDetail.getText().toString());
+            pj.setLattitude(latitude);
+            pj.setLongitude(longitude);
+            pj.setLAC(tvLac.getText().toString());
+            pj.setCID(tvCid.getText().toString());
+            pj.setUser("noppadon"); //****
+
+            pj.AddProject();
+
         }else{
             Toast.makeText(getApplicationContext(),
                     "Sorry! submitFlag False",
@@ -259,6 +283,8 @@ public class CreateProjectActivity extends ActionBarActivity {
         }
         Log.e("gps :","Lat="+latitude+",Lng="+longitude);
 
+        tvLat.setText(latitude);
+        tvLng.setText(longitude);
 
     }
     /*

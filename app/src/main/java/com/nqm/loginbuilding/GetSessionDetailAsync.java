@@ -146,6 +146,8 @@ public class GetSessionDetailAsync  extends AsyncTask<String, Integer, String> {
             }
 
         } else {
+            Project.getInstance().setSessions(list);
+            Project.getInstance().ShowProjectDetailActivity();
         }
 
         ringProgressDialog.dismiss();
