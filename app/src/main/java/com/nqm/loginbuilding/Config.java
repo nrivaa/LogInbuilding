@@ -20,6 +20,7 @@ public class Config {
     public static String url_getProjectDetail = "http://49.231.24.106/TranstagramInbuilding/GetProjectDetail.php";
     public static String url_getSessionDetail = "http://49.231.24.106/TranstagramInbuilding/GetSessionDetail.php";
     public static String url_addProject = "http://49.231.24.106/TranstagramInbuilding/AddProject.php";
+    public static String url_addSession = "http://49.231.24.106/TranstagramInbuilding/AddSession.php";
 
     // / RESIZE IMAGE QUALITY
     public static void resizeImageFile(File sourceFile) {

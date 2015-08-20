@@ -1,11 +1,15 @@
 package com.nqm.loginbuilding;
 
+import android.content.Context;
+
 import java.util.Date;
 
 /**
  * Created by sirawang on 01/07/2015.
  */
 public class Session {
+    private Context ctx;
+    private String buildingID;
     private String point;
     private String floor;
     private String description;
@@ -133,6 +137,22 @@ public class Session {
         this.user = user;
     }
 
+    public Context getCtx() {
+        return ctx;
+    }
+
+    public void setCtx(Context ctx) {
+        this.ctx = ctx;
+    }
+
+    public String getBuildingID() {
+        return buildingID;
+    }
+
+    public void setBuildingID(String buildingID) {
+        this.buildingID = buildingID;
+    }
+
     public Session() {
         //TODO: Implement code
     }
@@ -145,7 +165,8 @@ public class Session {
     }
 
     public void AddSession(){
-        //TODO: Implement code
+        AddSessionAsync task = new AddSessionAsync(ctx,this,buildingID);
+        task.execute();
     }
 
     public void EditSession(){

@@ -24,11 +24,13 @@ public class AddSessionAsync  extends AsyncTask<String, Integer, String> {
 
     private Context context;
     private ProgressDialog ringProgressDialog;
-    private int curPage;
+    private Session session;
+    private String id;
 
-    AddSessionAsync(Context context, int page) {
+    AddSessionAsync(Context context, Session session, String id) {
         this.context = context;
-        this.curPage = page;
+        this.session = session;
+        this.id=id;
         //ringProgressDialog = new ProgressDialog(context);
     }
 
@@ -50,7 +52,7 @@ public class AddSessionAsync  extends AsyncTask<String, Integer, String> {
     public String InvokeGetFeed() {
         String responseString = null;
 
-        HttpPost httppost = new HttpPost("http://www.youtube.com");
+        HttpPost httppost = new HttpPost(Config.url_addSession);
 
         HttpClient httpclient = new DefaultHttpClient();
 
@@ -63,10 +65,22 @@ public class AddSessionAsync  extends AsyncTask<String, Integer, String> {
                         }
                     });
 
-
             // Adding file data to http body
-
-            entity.addPart("page", new StringBody(Integer.toString(curPage)));
+            entity.addPart("Building_ID",new StringBody(session.getBuildingID()));
+            entity.addPart("Point",new StringBody(session.getPoint()));
+            entity.addPart("Floor",new StringBody(session.getFloor()));
+            entity.addPart("Description",new StringBody(session.getDescription()));
+            entity.addPart("Location",new StringBody(session.getLocation()));
+            entity.addPart("Loc_Specification",new StringBody(session.getLoc_Specification()));
+            entity.addPart("AWN_Status",new StringBody(session.getStatus_AWN()));
+            entity.addPart("DTAC_Status",new StringBody(session.getStatus_DTAC()));
+            entity.addPart("TRUEH_Status",new StringBody(session.getStatus_TRUEH()));
+            entity.addPart("3BB_Status",new StringBody(session.getStatus_3BB()));
+            entity.addPart("Remark",new StringBody(session.getRemark()));
+            entity.addPart("Create_Date",new StringBody(session.getCreateDate().toString()));
+            entity.addPart("Confirm_Status",new StringBody(session.getConfirmStatus()));
+            entity.addPart("Confirm_Datetime",new StringBody(session.getConfirmDate().toString()));
+            entity.addPart("User",new StringBody(session.getUser()));
 
             httppost.setEntity(entity);
 

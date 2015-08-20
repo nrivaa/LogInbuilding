@@ -79,6 +79,7 @@ public class LoginAsync   extends AsyncTask<String, Integer, String> {
             if (statusCode == 200) {
                 // Server response
                 responseString = EntityUtils.toString(r_entity);
+                Config.user=arg0[0];
             } else {
                 responseString = "Error occurred! Http Status Code: "
                         + statusCode;
