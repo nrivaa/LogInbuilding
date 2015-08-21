@@ -309,7 +309,7 @@ public class Project {
 
     public void GetSessionList()
     {
-        GetSessionDetailAsync taskGetSession =new GetSessionDetailAsync(ctx,this.buildingID);
+        GetSessionDetailAsync taskGetSession =new GetSessionDetailAsync(ctx,this.buildingID,"test");
         taskGetSession.execute();
     }
 

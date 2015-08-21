@@ -36,10 +36,10 @@ public class AddSessionAsync  extends AsyncTask<String, Integer, String> {
 
     protected void onPreExecute() {
 
-        String loadtext = "Get information...";
-        ringProgressDialog = ProgressDialog.show(context, "Please wait ...",
-                loadtext, false);
-        ringProgressDialog.setCancelable(false);
+        //String loadtext = "Get information...";
+        //ringProgressDialog = ProgressDialog.show(context, "Please wait ...",
+        //        loadtext, false);
+        //ringProgressDialog.setCancelable(false);
 
     }
 
@@ -78,8 +78,8 @@ public class AddSessionAsync  extends AsyncTask<String, Integer, String> {
             entity.addPart("3BB_Status",new StringBody(session.getStatus_3BB()));
             entity.addPart("Remark",new StringBody(session.getRemark()));
             entity.addPart("Create_Date",new StringBody(session.getCreateDate().toString()));
-            entity.addPart("Confirm_Status",new StringBody(session.getConfirmStatus()));
-            entity.addPart("Confirm_Datetime",new StringBody(session.getConfirmDate().toString()));
+            //entity.addPart("Confirm_Status",new StringBody(session.getConfirmStatus()));
+            //entity.addPart("Confirm_Datetime",new StringBody(session.getConfirmDate().toString()));
             entity.addPart("User",new StringBody(session.getUser()));
 
             httppost.setEntity(entity);
@@ -160,7 +160,7 @@ public class AddSessionAsync  extends AsyncTask<String, Integer, String> {
 //            ((FeedActivity) context).dismissLoadingTopBottom();
 //        }
 
-        ringProgressDialog.dismiss();
+        //ringProgressDialog.dismiss();
     }
 
 }

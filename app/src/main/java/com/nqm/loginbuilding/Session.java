@@ -20,9 +20,9 @@ public class Session {
     private String status_TRUEH;
     private String status_3BB;
     private String remark;
-    private Date createDate;
+    private String createDate;
     private String confirmStatus;
-    private Date confirmDate;
+    private String confirmDate;
     private String user;
 
     public String getPoint() {
@@ -105,11 +105,11 @@ public class Session {
         this.remark = remark;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
@@ -121,11 +121,11 @@ public class Session {
         this.confirmStatus = confirmStatus;
     }
 
-    public Date getConfirmDate() {
+    public String getConfirmDate() {
         return confirmDate;
     }
 
-    public void setConfirmDate(Date confirmDate) {
+    public void setConfirmDate(String confirmDate) {
         this.confirmDate = confirmDate;
     }
 

@@ -28,7 +28,7 @@ public class AddProjectAsync extends AsyncTask<String, Integer, String> {
 private Context context;
 private ProgressDialog ringProgressDialog;
 private Project pj;
-long totalSize = 0;
+long totalSize = 0; //
 
     AddProjectAsync(Context context, Project pj) {
         this.context = context;

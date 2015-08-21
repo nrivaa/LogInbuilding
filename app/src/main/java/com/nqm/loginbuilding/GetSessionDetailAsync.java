@@ -30,11 +30,12 @@ public class GetSessionDetailAsync  extends AsyncTask<String, Integer, String> {
 
     private Context context;
     private ProgressDialog ringProgressDialog;
-    private String id;
+    private String id, point;
 
-    GetSessionDetailAsync(Context context, String id) {
+    GetSessionDetailAsync(Context context, String id, String point) {
         this.context = context;
         this.id = id;
+        this.point = point;
         ringProgressDialog = new ProgressDialog(context);
     }
 
@@ -68,6 +69,7 @@ public class GetSessionDetailAsync  extends AsyncTask<String, Integer, String> {
             // Adding file data to http body
 
             entity.addPart("Building_ID", new StringBody(id));
+            entity.addPart("Point", new StringBody(id));
 
             httppost.setEntity(entity);
 
@@ -129,9 +131,9 @@ public class GetSessionDetailAsync  extends AsyncTask<String, Integer, String> {
                     item.setStatus_TRUEH(obj.getString("TRUEH_Status"));
                     item.setStatus_3BB(obj.getString("3BB_Status"));
                     item.setRemark(obj.getString("Remark"));
-                    item.setCreateDate(new Date());
+                    //item.setCreateDate(obj.getString("Confirm_Status"));
                     item.setConfirmStatus(obj.getString("Confirm_Status"));
-                    item.setConfirmDate(new Date());
+                    //item.setConfirmDate(obj.getString("Confirm_Status"));
                     item.setUser(obj.getString("User"));
 
                     list.add(item);

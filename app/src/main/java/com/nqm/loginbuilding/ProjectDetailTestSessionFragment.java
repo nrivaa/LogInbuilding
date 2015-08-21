@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class ProjectDetailTestSessionFragment extends Fragment {
     private Context ctx;
     private List<String> sessions;
     private ArrayAdapter<String> itemsAdapter;
+    private Button btnCreateSession;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +40,15 @@ public class ProjectDetailTestSessionFragment extends Fragment {
 
         ListView listView = (ListView) windows.findViewById(R.id.listView);
         listView.setAdapter(itemsAdapter);
+        btnCreateSession = (Button) windows.findViewById(R.id.btnCS);
+        btnCreateSession.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String id = Project.getInstance().getBuildingID();
+                Intent i = new Intent(ctx, AddSessionActivity.class);
+                i.putExtra("BUILDING_ID", id);
+                startActivity(i);
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

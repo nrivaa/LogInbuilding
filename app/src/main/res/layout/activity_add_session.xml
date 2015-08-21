@@ -21,20 +21,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView android:text="Building ID: " android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/createSession_BuildingID" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
                 <TextView android:text="Point: " android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -80,10 +66,10 @@
                 <TextView android:text="Location: " android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/createSession_location" />
+                <Spinner
+                    android:id="@+id/spnLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -94,10 +80,25 @@
                 <TextView android:text="LOC Specification: " android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
-                    android:layout_width="fill_parent"
+                <RadioGroup
+                    android:id="@+id/rbLoc"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/createSession_Loc_Specification" />
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Public"
+                        android:id="@+id/rbPublic" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Private"
+                        android:id="@+id/rbPrivate" />
+
+                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
@@ -108,10 +109,10 @@
                 <TextView android:text="AWN Status: " android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/createSession_awn_status" />
+                <Spinner
+                    android:id="@+id/spnStatusAwn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -122,10 +123,10 @@
                 <TextView android:text="DTAC Status: " android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/createSession_dtac_status" />
+                <Spinner
+                    android:id="@+id/spnStatusDtac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -136,10 +137,10 @@
                 <TextView android:text="TRUEH Status: " android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/createSession_trueh_status" />
+                <Spinner
+                    android:id="@+id/spnStatusTrue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -150,10 +151,10 @@
                 <TextView android:text="3BB Status: " android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/createSession_3bb_staus" />
+                <Spinner
+                    android:id="@+id/spnStatus3BB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -164,66 +165,25 @@
                 <TextView android:text="Remark: " android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
-                    android:layout_width="fill_parent"
+                <RadioGroup
+                    android:id="@+id/rbRemark"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/createSession_remark" />
-            </LinearLayout>
+                    android:orientation="horizontal">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Coverage"
+                        android:id="@+id/rbCoverage" />
 
-                <TextView android:text="Create Date: " android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="VoiceCall"
+                        android:id="@+id/rbVoice" />
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/createSession_create_date" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView android:text="Confirm Status: " android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/createSession_confirm_status" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView android:text="Confirm Datetime: " android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/createSession_confirm_datetime" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView android:text="User: " android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/createSession_user" />
+                </RadioGroup>
             </LinearLayout>
 
             <Button
