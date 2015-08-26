@@ -45,6 +45,7 @@ public class ProjectDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_detail_activity_fragment);
 
+        Project.getInstance().GetProjectDetail(Project.getInstance().getBuildingID());
 
         // Define SlidingTabLayout (shown at top)
         // and ViewPager (shown at bottom) in the layout.

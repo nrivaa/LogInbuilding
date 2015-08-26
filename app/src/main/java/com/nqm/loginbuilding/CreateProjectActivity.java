@@ -244,7 +244,7 @@ public class CreateProjectActivity extends ActionBarActivity {
             pj.setLongitude(longitude);
             pj.setLAC(tvLac.getText().toString());
             pj.setCID(tvCid.getText().toString());
-            pj.setUser("noppadon"); //****
+            pj.setUser(Config.user);
 
             pj.AddProject();
 

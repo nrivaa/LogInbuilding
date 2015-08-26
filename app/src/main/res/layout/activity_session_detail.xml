@@ -9,7 +9,9 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/sessionDetail_btn_confirm"
+        android:id="@+id/linearLayout3">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -237,12 +239,19 @@
                 android:id="@+id/sessionDetail_tv_user" />
         </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Confirm Session"
-            android:id="@+id/sessionDetail_btn_confirm" />
+
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Session"
+        android:id="@+id/sessionDetail_btn_confirm"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/linearLayout3"
+        android:layout_alignEnd="@+id/linearLayout3" />
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.nqm.loginbuilding;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -110,6 +111,10 @@ public class AddSessionAsync  extends AsyncTask<String, Integer, String> {
 
         Log.e("Result", "Result:" + result);
         boolean error = true;
+
+        Intent i = new Intent(context,ProjectDetailActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
 
 //        try {
 //            JSONObject responseJSON = new JSONObject(result);

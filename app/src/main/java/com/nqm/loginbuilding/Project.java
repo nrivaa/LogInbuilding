@@ -227,7 +227,7 @@ public class Project {
     }
 
     public String getUser() {
-        return user;
+        return Config.user;
     }
 
     public void setUser(String user) {
@@ -308,6 +308,13 @@ public class Project {
     }
 
     public void GetSessionList()
+    {
+        GetSessionDetailAsync taskGetSession =new GetSessionDetailAsync(ctx,this.buildingID,"test");
+        taskGetSession.execute();
+        Project.getInstance().ShowProjectDetailActivity();
+    }
+
+    public void RefreshSessionList()
     {
         GetSessionDetailAsync taskGetSession =new GetSessionDetailAsync(ctx,this.buildingID,"test");
         taskGetSession.execute();

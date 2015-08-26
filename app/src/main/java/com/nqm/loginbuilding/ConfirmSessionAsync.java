@@ -2,6 +2,7 @@ package com.nqm.loginbuilding;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -24,20 +25,20 @@ public class ConfirmSessionAsync  extends AsyncTask<String, Integer, String> {
 
     private Context context;
     private ProgressDialog ringProgressDialog;
-    private int curPage;
+    private Session session;
 
-    ConfirmSessionAsync(Context context, int page) {
+    ConfirmSessionAsync(Context context, Session session) {
         this.context = context;
-        this.curPage = page;
+        this.session = session;
         //ringProgressDialog = new ProgressDialog(context);
     }
 
     protected void onPreExecute() {
 
-        String loadtext = "Get information...";
-        ringProgressDialog = ProgressDialog.show(context, "Please wait ...",
-                loadtext, false);
-        ringProgressDialog.setCancelable(false);
+        //String loadtext = "Get information...";
+        //ringProgressDialog = ProgressDialog.show(context, "Please wait ...",
+        //        loadtext, false);
+        //ringProgressDialog.setCancelable(false);
 
     }
 
@@ -50,7 +51,7 @@ public class ConfirmSessionAsync  extends AsyncTask<String, Integer, String> {
     public String InvokeGetFeed() {
         String responseString = null;
 
-        HttpPost httppost = new HttpPost("http://www.youtube.com");
+        HttpPost httppost = new HttpPost(Config.url_editSession);
 
         HttpClient httpclient = new DefaultHttpClient();
 
@@ -63,10 +64,22 @@ public class ConfirmSessionAsync  extends AsyncTask<String, Integer, String> {
                         }
                     });
 
-
             // Adding file data to http body
-
-            entity.addPart("page", new StringBody(Integer.toString(curPage)));
+            entity.addPart("Building_ID",new StringBody(session.getBuildingID()));
+            entity.addPart("Point",new StringBody(session.getPoint()));
+            entity.addPart("Floor",new StringBody(session.getFloor()));
+            entity.addPart("Description",new StringBody(session.getDescription()));
+            entity.addPart("Location",new StringBody(session.getLocation()));
+            entity.addPart("Loc_Specification",new StringBody(session.getLoc_Specification()));
+            entity.addPart("AWN_Status",new StringBody(session.getStatus_AWN()));
+            entity.addPart("DTAC_Status",new StringBody(session.getStatus_DTAC()));
+            entity.addPart("TRUEH_Status",new StringBody(session.getStatus_TRUEH()));
+            entity.addPart("3BB_Status",new StringBody(session.getStatus_3BB()));
+            entity.addPart("Remark",new StringBody(session.getRemark()));
+            entity.addPart("Create_Date",new StringBody(session.getCreateDate().toString()));
+            entity.addPart("Confirm_Status",new StringBody(session.getConfirmStatus()));
+            entity.addPart("Confirm_Datetime",new StringBody(session.getConfirmDate().toString()));
+            entity.addPart("User", new StringBody(session.getUser()));
 
             httppost.setEntity(entity);
 
@@ -96,6 +109,12 @@ public class ConfirmSessionAsync  extends AsyncTask<String, Integer, String> {
 
         Log.e("Result", "Result:" + result);
         boolean error = true;
+        //Project.getInstance().GetProjectDetail(Project.getInstance().getName());
+        Project.getInstance().RefreshSessionList();
+        Intent i = new Intent(context,SessionDetailActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+
 
 //        try {
 //            JSONObject responseJSON = new JSONObject(result);
@@ -146,7 +165,7 @@ public class ConfirmSessionAsync  extends AsyncTask<String, Integer, String> {
 //            ((FeedActivity) context).dismissLoadingTopBottom();
 //        }
 
-        ringProgressDialog.dismiss();
+        //ringProgressDialog.dismiss();
     }
 
 }

@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,15 +26,14 @@ public class SessionDetailActivity extends ActionBarActivity {
         Intent i = getIntent();
         int position = i.getIntExtra("position",0);
 
-
         final Context ctx = getApplicationContext();
 
         Button btn_confirm = (Button)findViewById(R.id.sessionDetail_btn_confirm);
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ctx,ProjectDetailActivity.class);
-                startActivity(i);
+
+                ConfirmSession(true);
             }
         });
 
@@ -86,9 +86,39 @@ public class SessionDetailActivity extends ActionBarActivity {
         tv_remark.setText(Project.getInstance().getSessions().get(position).getRemark());
         tv_createdate.setText(Project.getInstance().getSessions().get(position).getCreateDate().toString());
         tv_confirmStatus.setText(Project.getInstance().getSessions().get(position).getConfirmStatus());
-        tv_confirmDate.setText(Project.getInstance().getSessions().get(position).getConfirmStatus());
+        tv_confirmDate.setText(Project.getInstance().getSessions().get(position).getConfirmDate());
         tv_user.setText(Project.getInstance().getSessions().get(position).getUser());
 
+    }
+
+    // ConfirmSession
+    private void ConfirmSession(boolean confirmFlag) {
+        if (confirmFlag) {
+            Session ss = new Session();
+            ss.setCtx(getApplicationContext());
+            ss.setBuildingID(Project.getInstance().getBuildingID());
+            ss.setPoint(tv_point.getText().toString());
+            ss.setFloor(tv_floor.getText().toString());
+            ss.setDescription(tv_description.getText().toString());
+            ss.setLocation(tv_location.getText().toString());
+            ss.setLoc_Specification(tv_loc_spec.getText().toString());
+            ss.setStatus_AWN(tv_status_awn.getText().toString());
+            ss.setStatus_DTAC(tv_status_dtac.getText().toString());
+            ss.setStatus_TRUEH(tv_status_trueh.getText().toString());
+            ss.setStatus_3BB(tv_status_3bb.getText().toString());
+            ss.setRemark(tv_remark.getText().toString());
+            ss.setCreateDate(tv_createdate.getText().toString());
+            ss.setConfirmStatus("1");
+            ss.setConfirmDate("Now()");
+            ss.setUser(Config.user);
+
+            ss.ConfirmSession();
+
+        }else{
+            Toast.makeText(getApplicationContext(),
+                    "Sorry! submitFlag False",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

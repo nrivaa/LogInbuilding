@@ -82,10 +82,11 @@ public class AddSessionActivity extends ActionBarActivity {
         });
     }
 
-    // SubmitProject
+    // SubmitSession
     private void SubmitSession(boolean submitFlag) {
         if (submitFlag) {
             Session ss = new Session();
+            ss.setCtx(getApplicationContext());
             ss.setBuildingID(Project.getInstance().getBuildingID());
             ss.setPoint(tvPoint.getText().toString());
             ss.setFloor(tvFloor.getText().toString());
@@ -106,7 +107,7 @@ public class AddSessionActivity extends ActionBarActivity {
             ss.setCreateDate("Now()");
             ss.setConfirmStatus("0");
             ss.setConfirmDate("Now()");
-            ss.setUser("noppadon");
+            ss.setUser(Config.user);
 
             ss.AddSession();
 

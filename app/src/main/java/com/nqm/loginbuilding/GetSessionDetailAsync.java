@@ -131,16 +131,16 @@ public class GetSessionDetailAsync  extends AsyncTask<String, Integer, String> {
                     item.setStatus_TRUEH(obj.getString("TRUEH_Status"));
                     item.setStatus_3BB(obj.getString("3BB_Status"));
                     item.setRemark(obj.getString("Remark"));
-                    //item.setCreateDate(obj.getString("Confirm_Status"));
+                    item.setCreateDate(obj.getString("Create_Date"));
                     item.setConfirmStatus(obj.getString("Confirm_Status"));
-                    //item.setConfirmDate(obj.getString("Confirm_Status"));
+                    item.setConfirmDate(obj.getString("Confirm_Datetime"));
                     item.setUser(obj.getString("User"));
 
                     list.add(item);
                 }
 
                 Project.getInstance().setSessions(list);
-                Project.getInstance().ShowProjectDetailActivity();
+                //Project.getInstance().ShowProjectDetailActivity();
                 //((FeedActivity) context).setList(list);
 
             } catch (JSONException e) {
@@ -149,7 +149,7 @@ public class GetSessionDetailAsync  extends AsyncTask<String, Integer, String> {
 
         } else {
             Project.getInstance().setSessions(list);
-            Project.getInstance().ShowProjectDetailActivity();
+            //Project.getInstance().ShowProjectDetailActivity();
         }
 
         ringProgressDialog.dismiss();

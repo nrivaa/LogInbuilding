@@ -130,7 +130,7 @@ public class Session {
     }
 
     public String getUser() {
-        return user;
+        return Config.user;
     }
 
     public void setUser(String user) {
@@ -178,6 +178,7 @@ public class Session {
     }
 
     public void ConfirmSession(){
-        //TODO: Implement code
+        ConfirmSessionAsync task = new ConfirmSessionAsync(ctx,this);
+        task.execute();
     }
 }
